@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SalonBooking.Data;
+using SalonBooking.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+// Services
+builder.Services.AddScoped<IBusinessDayService, BusinessDayService>();
 
 var app = builder.Build();
 
